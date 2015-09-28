@@ -15,7 +15,7 @@
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
-  <script src="//js.leapmotion.com/leap-0.6.4.js"></script>
+  <script src="https://js.leapmotion.com/leap-0.6.4.js"></script>
 </head>
 <body>
   <div class="container">
@@ -100,10 +100,11 @@
   <script src="js/local_storage_manager.js"></script>
   <script src="js/game_manager.js"></script>
   <script src="js/application.js"></script>
+    <script src="js/leapController.js"></script>
   
   <!--leep motion coordinates-->
   <script type="text/javascript">
-    
+    /*
     function concatData(id, data) {
       return id + ": " + data + "<br>";
     }
@@ -180,40 +181,7 @@
     
     });
     
-    /*Gestures*/
-   var controllerOptions = {enableGestures: true};
-Leap.loop(controllerOptions, function(frame) {
-
-  // Display Gesture object data
-  if (frame.gestures.length > 0) {
-    for (var i = 0; i < frame.gestures.length; i++) {
-      var gesture = frame.gestures[i];
-      if(gesture.type == "swipe") {
-          //Classify swipe as either horizontal or vertical
-          var isHorizontal = Math.abs(gesture.direction[0]) > Math.abs(gesture.direction[1]);
-          //Classify as right-left or up-down
-          if(isHorizontal){
-              if(gesture.direction[0] > 0){
-                  swipeDirection = "right";
-              } else {
-                  swipeDirection = "left";
-              }
-          } else { //vertical
-              if(gesture.direction[1] > 0){
-                  swipeDirection = "up";
-              } else {
-                  swipeDirection = "down";
-              }                  
-          }
-          console.log(swipeDirection);
-          // כאן צריך להפעיל את הכיוון על המשחק וסיימנו
-          
-       }
-     }
-  }
-
-});
-    
+    */
     </script>
 </body>
 </html>

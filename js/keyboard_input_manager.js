@@ -1,6 +1,6 @@
 function KeyboardInputManager() {
   this.events = {};
-
+/*
   if (window.navigator.msPointerEnabled) {
     //Internet Explorer 10 style
     this.eventTouchstart    = "MSPointerDown";
@@ -11,7 +11,7 @@ function KeyboardInputManager() {
     this.eventTouchmove     = "touchmove";
     this.eventTouchend      = "touchend";
   }
-
+*/
   this.listen();
 }
 
@@ -22,7 +22,7 @@ KeyboardInputManager.prototype.on = function (event, callback) {
   this.events[event].push(callback);
 };
 
-KeyboardInputManager.prototype.emit = function (event, data) {
+ KeyboardInputManager.prototype.emit = function (event, data) {
   var callbacks = this.events[event];
   if (callbacks) {
     callbacks.forEach(function (callback) {
@@ -49,12 +49,15 @@ KeyboardInputManager.prototype.listen = function () {
     65: 3  // A
   };
 
+
+
+
+    
   // Respond to direction keys
   document.addEventListener("keydown", function (event) {
     var modifiers = event.altKey || event.ctrlKey || event.metaKey ||
                     event.shiftKey;
     var mapped    = map[event.which];
-
     if (!modifiers) {
       if (mapped !== undefined) {
         event.preventDefault();
@@ -73,6 +76,34 @@ KeyboardInputManager.prototype.listen = function () {
   this.bindButtonPress(".restart-button", this.restart);
   this.bindButtonPress(".keep-playing-button", this.keepPlaying);
 
+
+
+    
+}; // end listen
+
+
+ 
+
+KeyboardInputManager.prototype.restart = function (event) {
+  event.preventDefault();
+  this.emit("restart");
+};
+
+KeyboardInputManager.prototype.keepPlaying = function (event) {
+  event.preventDefault();
+  this.emit("keepPlaying");
+};
+
+KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
+  var button = document.querySelector(selector);
+  button.addEventListener("click", fn.bind(this));
+  button.addEventListener(this.eventTouchend, fn.bind(this));
+};
+
+
+
+
+/*
   // Respond to swipe events
   var touchStartClientX, touchStartClientY;
   var gameContainer = document.getElementsByClassName("game-container")[0];
@@ -124,21 +155,4 @@ KeyboardInputManager.prototype.listen = function () {
       // (right : left) : (down : up)
       self.emit("move", absDx > absDy ? (dx > 0 ? 1 : 3) : (dy > 0 ? 2 : 0));
     }
-  });
-};
-
-KeyboardInputManager.prototype.restart = function (event) {
-  event.preventDefault();
-  this.emit("restart");
-};
-
-KeyboardInputManager.prototype.keepPlaying = function (event) {
-  event.preventDefault();
-  this.emit("keepPlaying");
-};
-
-KeyboardInputManager.prototype.bindButtonPress = function (selector, fn) {
-  var button = document.querySelector(selector);
-  button.addEventListener("click", fn.bind(this));
-  button.addEventListener(this.eventTouchend, fn.bind(this));
-};
+  });*/
