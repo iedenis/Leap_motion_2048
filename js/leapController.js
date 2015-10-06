@@ -65,13 +65,13 @@ controller.on("gesture",function(gesture){
               }                  
           }
         }
-    if(gesture.type=="keyTap"){
+    if(gesture.type=="key"){
         console.log("****restarting the game******");
         self.emit("restart");
     }
     });
     //restarting the game on pressing button restart-button
- this.bindButtonPress(".restart-button", this.restart);
+// this.bindButtonPress(".restart-button", this.restart);
 this.bindButtonPress(".keep-playing-button",this.keepPlaying);
     
 //restarting the game after finish//    
